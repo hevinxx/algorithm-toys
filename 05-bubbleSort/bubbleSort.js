@@ -38,4 +38,21 @@ var i;
 
 var bubbleSort = function(array) {
   // Your code here.
+  var result = [array[0]];
+  
+  array.slice(1).reduce(function(memo, item) {
+    for (var j = 0; j < memo.length; j++) {
+      if (item < memo[j]) {
+        if (j = 0) {
+          memo.unshift(item);
+        } else {
+          memo.splice(j-1, 0, item);
+        }
+        return memo;
+      }
+    }
+    memo.push(item);
+    return memo;
+  }, result);
+  return result;
 };
