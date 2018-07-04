@@ -11,5 +11,19 @@
  */
 
 var commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+  var objStr1 = {};
+  var arrStr2 = string2.split('');
+  var result = [];
+
+  for (var i = 0; i < string1.length; i++) {
+    objStr1[string1[i]] = string1[i];
+  }
+  for (var key in objStr1) {
+    if (arrStr2.includes(key)) {
+      result.push(key);
+    }
+  }
+  return result.join('');
 };
+
+console.log(commonCharacters('acexivou', 'aegihobu'))
