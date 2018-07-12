@@ -17,5 +17,29 @@
 
 var rotatedArraySearch = function (rotated, target) {
   // Your code here:
+  const recursion = function (start, end) {
+    const mid = Math.floor((end + start) / 2);
+    if (target === rotated[start]) {
+      return start;
+    } else if (target === rotated [mid]) {
+      return mid;
+    } else if (target === rotated [end]) {
+      return end;
+    } else if (rotated[start] > rotated[mid]) {
+      if (target > rotated[start] || target < rotated[mid]) {
+        return recursion(start, mid);
+      } else {
+        return recursion(mid, end);
+      }
+    } else {
+      if (target > rotated[mid] || target < rotated[end]) {
+        return recursion(mid, end);
+      } else {
+        return recursion(start, end);
+      }
+    }
+  }  
+  return recursion(0, rotated.length - 1);
 };
 
+console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2));
