@@ -18,10 +18,10 @@
  */
 
 var powerSet = function(str){
-  var arr = str.split('').sort((a,b) => a < b ? -1 : 1);
+  var arr = str.split('').sort();
   var result = [];
   for (var i = 0; i < 2 ** arr.length; i++) {
-    var binaries = (+ '' + i).toString(2).split('');
+    var binaries = i.toString(2).split('');
     while (binaries.length < arr.length) {
       binaries.unshift('0');
     }
@@ -32,5 +32,3 @@ var powerSet = function(str){
   }
   return result;
 }
-
-console.log(powerSet('jump'));
