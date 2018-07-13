@@ -18,4 +18,19 @@
  */
 
 var powerSet = function(str){
+  var arr = str.split('').sort((a,b) => a < b ? -1 : 1);
+  var result = [];
+  for (var i = 0; i < 2 ** arr.length; i++) {
+    var binaries = (+ '' + i).toString(2).split('');
+    while (binaries.length < arr.length) {
+      binaries.unshift('0');
+    }
+    var element = binaries.map((binary, index) => {
+      return binary === '0' ? '' : arr[index]
+    }).join('');
+    result.push(element);
+  }
+  return result;
 }
+
+console.log(powerSet('jump'));
