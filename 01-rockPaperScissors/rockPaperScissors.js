@@ -19,29 +19,22 @@
 
 var rockPaperScissors = function (integer) {
   var result = [];
-  var cases = Math.pow(3, integer);
+  var cases = 3 ** integer;
   for (var i = 0; i < cases; i++) {
-    var m = i;
-    var instance = [];
-    for (var j = integer; j > 0; j--) {
-      var r = m % Math.pow(3, j-1);
-      var pq = m - r;
-      instance.push(pq / Math.pow(3, j-1));
-      m = r;
+    var trinaries = i.toString(3).split('');
+    while (trinaries.length < integer) {
+      trinaries.unshift('0');
     }
-    result.push(instance);
-  }
-  for (var l = 0; l < result.length; l++) {
-    result[l] = result[l].map(function (three) {
-      if (three === 0) {
+    var element = trinaries.map(function (three) {
+      if (three === '0') {
         return 'rock';
-      } else if (three === 1) {
+      } else if (three === '1') {
         return 'scissors';
-      } else if (three === 2) {
+      } else if (three === '2') {
         return 'paper';
       }
     });
+    result.push(element);
   }
   return result;
 }
-
