@@ -39,6 +39,29 @@ var Tree = function(value){
 
 Tree.prototype.BFSelect = function(filter) {
   // return an array of values for which the function filter(value, depth) returns true
+  var obj = filter(this.value, 0) ? { 0: [this] } : {}
+  var lookUp = function(node, depth) {
+    for (var i = 0; i < node.children.length; i++) {
+      if (filter(node.children[i].value, depth + 1)) {
+        if (obj.hasOwnProperty(depth + 1)) {
+          obj[depth + 1].push(node.children[i]);
+        } else {
+          obj[depth + 1] = [node.children[i]];
+        }
+      }
+    }
+    for (var j = 0; j < node.children.length; j++) {
+      lookUp(node.children[j], depth + 1);
+    }
+  }
+  lookUp(this, 0);
+  var result = [];
+  for (var key in obj) {
+    for (var k = 0; k < obj[key].length; k++) {
+      result.push(obj[key][k].value);
+    }
+  }
+  return result;
 };
 
 /**
