@@ -33,8 +33,19 @@
 
 'use strict';
 
-var compose = function(){
+var compose = function(...args){
+  args.reverse();
+  return (input) => {
+    return args.reduce((memo, item) => {
+      return item(memo);
+    }, input)
+  }
 };
 
-var pipe = function(){
+var pipe = function(...args){
+  return (input) => {
+    return args.reduce((memo, item) => {
+      return item(memo);
+    }, input)
+  }
 };
