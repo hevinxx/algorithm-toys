@@ -60,6 +60,7 @@ Range.prototype.each = function (callback) {
 };
 
 Range.prototype.includes = function (val) {
+  if (this.size() === 1) { return val === this.start; }
   return (val - this.start) % this.step === 0;
 };
 
