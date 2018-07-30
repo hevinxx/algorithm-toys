@@ -41,7 +41,7 @@
 
 var Range = function(start, end, step) {
   if (start === undefined) { return null; }
-  if ((end - start) * step < 0 || ((end - start) !== 0 && step === 0)) { throw new error("Think Again!"); }
+  if ((end - start) * step < 0 || ((end - start) !== 0 && step === 0)) { throw new Error("Think Again!"); }
   this.start = start;
   this.end = end || start;
   this.step = step || 1;
