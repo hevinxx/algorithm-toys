@@ -24,17 +24,17 @@
  *
  */
 var balancedParens = function(input){
-  var que = [];
+  var stack = [];
   for (var i = 0; i < input.length; i++) {
     if (['(', '{', '['].includes(input[i])) {
-      que.push(input[i]);
+      stack.push(input[i]);
     } else if (input[i] === ')') {
-      if (que.pop() !== '(') { return false; }
+      if (stack.pop() !== '(') { return false; }
     } else if (input[i] === '}') {
-      if (que.pop() !== '{') { return false; }
+      if (stack.pop() !== '{') { return false; }
     } else if (input[i] === ']') {
-      if (que.pop() !== '[') { return false; }
+      if (stack.pop() !== '[') { return false; }
     }
   }
-  return que.length === 0 ? true : false
+  return stack.length === 0 ? true : false
 };
