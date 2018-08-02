@@ -13,7 +13,22 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+  var champion = 0; 
+  var challenger = 0;
+  var record = 1;
+  for (var i = 1; i < string.length; i++) {    
+    if (string[i] !== string[challenger]) {
+      if (i - challenger > record) {
+        champion = challenger;
+        record = i - champion;
+      } 
+      challenger = i;
+    } if (i === string.length - 1 && i + 1 - challenger > record) {
+      champion = challenger;
+      record = i + 1 - champion;
+    }
+  }
+  return [champion, champion + record - 1];
 };
 
 // If you need a random string generator, use this!
