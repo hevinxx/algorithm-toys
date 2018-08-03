@@ -98,5 +98,26 @@
 
 
 var mergeSort = function(array) {
-  // Your code here.
+  var merge = function (array1, array2) {
+    var result = [];
+    while (array1.length > 0 && array2.length > 0) {
+      array1[0] < array2[0] ? result.push(array1.shift()) : result.push(array2.shift())
+    }
+    result = result.concat(array1).concat(array2)
+    return result;
+  }
+
+  var mergeAll = function (array) {
+    var result = [];
+    for (var i = 0; i < array.length; i += 2) {
+      if (i + 1 === array.length) {
+        result.push(array[i])
+      } else {
+        result.push(merge(array[i], array[i + 1]));
+      }
+    }
+    return result.length === 1 ? result[0] : mergeAll(result)
+  }
+
+  return mergeAll(array.map(item => [item]));
 };
