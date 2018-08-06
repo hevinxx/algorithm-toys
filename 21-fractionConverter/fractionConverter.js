@@ -14,4 +14,17 @@
 
 var toFraction = function(number) {
   // Your code here
+  var array = number.toString(10).split('.');
+  if (array.length === 1) { return '' + array[0] + '/1'}
+  var numerator = array[1] * 1;
+  var denomiator = 10 ** array[1].length;
+  while (!(numerator % 2 || denomiator % 2)) {
+    numerator /= 2;
+    denomiator /= 2;
+  }
+  while (!(numerator % 5 || denomiator % 5)) {
+    numerator /= 5;
+    denomiator /= 5;
+  }
+  return '' + (array[0] * denomiator + numerator) + '/' + denomiator;
 };
