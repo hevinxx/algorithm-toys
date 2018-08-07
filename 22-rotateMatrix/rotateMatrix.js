@@ -45,12 +45,10 @@
 
 var rotateMatrix = function(matrix, direction
 ) {
-  const numColumns = matrix[0].length;
-  const numRows = matrix.length;
   let newMatrix = [];
-  for (let i = 0; i < numColumns; i++) {
+  for (let i = 0; i < matrix[0].length; i++) {
     newMatrix.push([]);
-    for (let j = 0; j < numRows; j++) {
+    for (let j = 0; j < matrix.length; j++) {
       if (!direction || direction === 1) { newMatrix[i].push(matrix[numRows - 1 - j][i]); }
       else if (direction === -1) { newMatrix[i].push(matrix[j][numColumns - 1 - i]); }
     }
