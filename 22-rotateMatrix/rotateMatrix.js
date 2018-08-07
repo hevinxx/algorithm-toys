@@ -49,8 +49,8 @@ var rotateMatrix = function(matrix, direction
   for (let i = 0; i < matrix[0].length; i++) {
     newMatrix.push([]);
     for (let j = 0; j < matrix.length; j++) {
-      if (!direction || direction === 1) { newMatrix[i].push(matrix[numRows - 1 - j][i]); }
-      else if (direction === -1) { newMatrix[i].push(matrix[j][numColumns - 1 - i]); }
+      if (!direction || direction === 1) { newMatrix[i].push(matrix[matrix.length - 1 - j][i]); }
+      else if (direction === -1) { newMatrix[i].push(matrix[j][matrix[0].length - 1 - i]); }
     }
   }
   return newMatrix;
