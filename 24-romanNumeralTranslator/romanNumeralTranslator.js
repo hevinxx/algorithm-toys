@@ -28,5 +28,10 @@ var DIGIT_VALUES = {
 
 var translateRomanNumeral = function(romanNumeral){
 // TODO: Implement me!
-
+  const numbers = romanNumeral.split('').map(roman => DIGIT_VALUES[roman]);
+  let result = numbers[numbers.length - 1];
+  for (var i = 0; i < numbers.length - 1; i++) {
+    numbers[i] < numbers[i + 1] ? result -= numbers[i] : result += numbers[i]
+  }
+  return result;
 };
