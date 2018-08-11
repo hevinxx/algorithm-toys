@@ -27,7 +27,7 @@ var DIGIT_VALUES = {
 };
 
 var translateRomanNumeral = function(romanNumeral){
-  if (typeof romanNumeral !== string) { return null; }
+  if (typeof romanNumeral !== 'string') { return null; }
   if (romanNumeral.length === 0) { return 0; }
   const numbers = romanNumeral.split('').map(roman => DIGIT_VALUES[roman]);
   let result = numbers[numbers.length - 1];
