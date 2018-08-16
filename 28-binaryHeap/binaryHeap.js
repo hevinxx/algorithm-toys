@@ -79,9 +79,36 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  if (this._heap.length === 0) { return this._heap.push(value); }
+  var compareWithParent = index => {
+    if (this._compare(this._heap[Math.floor( (index - 1) / 2 )], value)) {
+      return this._heap[index] = value;
+    }
+    this._heap[index] = this._heap[Math.floor( (index - 1) / 2 )];
+    return compareWithParent(Math.floor( (index - 1) / 2 ))
+  }
+  compareWithParent(this._heap.length);
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  if (this._heap.length === 0) { return null; }
+  var value = this._heap[0] = this._heap[this._heap.length - 1];
+  var compareWithChild = function (index) {
+    if (this._compare(value, this._heap[index * 2 + 1])) {
+      if (this._compare(value, this._heap[index * 2 + 2])) {
+        return this._heap[index] = value;
+      }
+      this._heap[index] = this._heap[index * 2 + 2];
+      return compareWithChild(index * 2 + 2);
+    }
+    this._heap[index] = this._heap[index * 2 + 1];
+    return compareWithChild(index * 2 + 1);
+  }
+  compareWithChild(0);
 }
+
+// var binaryHeap = new BinaryHeap();
+// binaryHeap.insert(4);
+// binaryHeap.insert(8);
+// binaryHeap.insert(12);
+// console.log(binaryHeap._heap);
