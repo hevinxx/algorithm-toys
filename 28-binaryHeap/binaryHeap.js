@@ -81,7 +81,7 @@ BinaryHeap.prototype.getRoot = function () {
 BinaryHeap.prototype.insert = function (value) {
   if (this._heap.length === 0) { return this._heap.push(value); }
   var compareWithParent = index => {
-    if (this._compare(this._heap[Math.floor( (index - 1) / 2 )], value)) {
+    if (index === 0 || this._compare(this._heap[Math.floor( (index - 1) / 2 )], value)) {
       return this._heap[index] = value;
     }
     this._heap[index] = this._heap[Math.floor( (index - 1) / 2 )];
@@ -92,10 +92,11 @@ BinaryHeap.prototype.insert = function (value) {
 
 BinaryHeap.prototype.removeRoot = function () {
   if (this._heap.length === 0) { return null; }
+  var originalRoot = this._heap[0];
   var value = this._heap[0] = this._heap[this._heap.length - 1];
-  var compareWithChild = function (index) {
-    if (this._compare(value, this._heap[index * 2 + 1])) {
-      if (this._compare(value, this._heap[index * 2 + 2])) {
+  var compareWithChild = index => {
+    if (this._compare(value, this._heap[index * 2 + 1]) || this._compare(this._heap.length, index * 2 + 2)) {
+      if (this._compare(value, this._heap[index * 2 + 2]) || this._compare(this._heap.length, index * 2 + 3)) {
         return this._heap[index] = value;
       }
       this._heap[index] = this._heap[index * 2 + 2];
@@ -105,10 +106,6 @@ BinaryHeap.prototype.removeRoot = function () {
     return compareWithChild(index * 2 + 1);
   }
   compareWithChild(0);
+  this._heap.pop();
+  return originalRoot;
 }
-
-// var binaryHeap = new BinaryHeap();
-// binaryHeap.insert(4);
-// binaryHeap.insert(8);
-// binaryHeap.insert(12);
-// console.log(binaryHeap._heap);
