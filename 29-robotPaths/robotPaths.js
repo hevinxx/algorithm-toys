@@ -28,6 +28,27 @@ var makeBoard = function(n) {
   return board;
 };
 
-var robotPaths = function(n, board, i, j) {
-}
+var robotPaths = function(n) {
+  var count = 0;
+  var board = new makeBoard(n);
 
+  var robotPath = function(i, j) {
+    if (i === n - 1 && j === n - 1) { count++; }
+    else {
+      board.togglePiece(i, j);
+      if (!board.hasBeenVisited(Math.max(0, i - 1), j)) {
+        robotPath(i - 1, j);
+      } if (!board.hasBeenVisited(Math.min(n - 1, i + 1), j)) {
+        robotPath(i + 1, j);
+      } if (!board.hasBeenVisited(i, Math.max(0, j - 1))) {
+        robotPath(i, j - 1);
+      } if (!board.hasBeenVisited(i, Math.min(n - 1, j + 1))) {
+        robotPath(i, j + 1);
+      }
+      board.togglePiece(i, j);
+    }
+  }
+  
+  robotPath(0, 0);
+  return count;
+}
