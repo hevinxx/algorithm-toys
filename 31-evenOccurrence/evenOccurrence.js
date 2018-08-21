@@ -11,5 +11,15 @@
 */
 
 var evenOccurrence = function(arr) {
-  // Your code here.
+  var odds = {};
+  for (var i = 0; i < arr.length; i++) {
+    if (odds.hasOwnProperty(arr[i])) { continue; }
+    var isEven = false;
+    for (var j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j]) { isEven = !isEven; }
+    }
+    if (isEven) { return arr[i]; }
+    odds[arr[i]] = true;
+  }
+  return null;
 };
