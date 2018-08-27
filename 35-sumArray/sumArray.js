@@ -11,4 +11,20 @@
 
 // Solved in O(n) time with O(1) memory
 var sumArray = function(array) {
+  var sum = smallestSum = biggestGap = 0;
+  var biggestNegative = array[0];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] > biggestNegative) { biggestNegative = array[i]; }
+    sum += array[i];
+    if (array[i] < 0 && array[i + 1] >= 0) {
+      if (sum < smallestSum) {
+        smallestSum = sum;
+      }
+    } else if (i === array.length - 1 || array[i] > 0 && array[i + 1] <= 0) {
+      if (sum - smallestSum > biggestGap) {
+        biggestGap = sum - smallestSum;
+      }
+    }
+  }
+  return biggestGap === 0 ? biggestNegative : biggestGap
 };
