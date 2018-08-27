@@ -46,8 +46,17 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
+var insertionSort = function(array, comparator) {
   // Your code goes here. Feel free to add helper functions if needed.
+  var comparator = comparator || function (a, b) { return a.value - b.value; }
+  for (var i = 0; i < array.length; i++) {
+    for (var j = 0; j < i; j++) {
+      if (comparator(array[i], array[j]) < 0) {
+        array.splice(j, 0, array[i]);
+        array.
+
+      }
+    }
+  }
   return array;
 };
