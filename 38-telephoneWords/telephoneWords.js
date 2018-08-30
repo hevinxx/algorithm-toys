@@ -22,7 +22,7 @@
   *   - The digits 0 and 1 do not have letters associated with them, so they should be left as numbers.
   *   - Don't return every combination of those digits in any order, just the order given.
   *
-  *  Extra credit: There's a list of English dictionary words at /usr/share/dict/words .
+  *  Extra credit: There's a list of English dictionary words at /usr/share/dict/words .//어딨죠?
   *  Why not filter your results to only return words contained in that file?
   *
   */
@@ -41,6 +41,15 @@ var phoneDigitsToLetters = {
 };
 
 
-var telephoneWords = function(digitString) {
-  // TODO: return every combination that can be spelled on a phone with these digits
+var telephoneWords = function (digitString) {
+  var multiplyArray = (arr1, arr2) => {
+    var result = [];
+    for (i = 0; i < arr1.length; i++) {
+      for (j = 0; j < arr2.length; j++) {
+        result.push(arr1[i] + arr2[j]);
+      }
+    }
+    return result;
+  }
+  return digitString.split('').map(digit => phoneDigitsToLetters[digit].split('')).reduce(multiplyArray);
 };
