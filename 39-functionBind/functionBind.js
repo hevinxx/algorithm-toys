@@ -23,10 +23,13 @@
  *
 */
 
-var bind = function(
-) {
-  // TODO: Your code here
-};
+var bind = function (func, dis, ...args1) {
+  return function (...args2) {
+    return dis === null
+      ? func(...args1, ...args2)
+      : func.call(dis, ...args1, ...args2)
+  };
+}
 
 /*
  * Function.prototype.bind:
@@ -53,7 +56,11 @@ var bind = function(
  *
 */
 
-Function.prototype.bind = function(
-) {
-  // TODO: Your code here
+Function.prototype.bind = function (dis, ...args1) {
+  var func = this;
+  return function (...args2) {
+    return dis === null
+      ? func(...args1, ...args2)
+      : func.call(dis, ...args1, ...args2)
+  };
 };
