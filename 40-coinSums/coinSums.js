@@ -24,8 +24,26 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var makeChange = function(total){
+var unit = [200, 100, 50, 20, 10, 5, 2, 1];
+var makeChange = function (total) {
+  var result = 0;
 
+  var count = function (remainder, unitIndex) {
+    if (remainder === 0) {
+      result += 1;
+      return;
+    }
+    for (var i = unitIndex; i < unit.length; i++) {
+      if (remainder >= unit[i]) {
+        unitIndex = i;
+        break;
+      }
+    }
+    for (var i = unitIndex; i < unit.length; i++) {
+      count(remainder - unit[i], i)
+    }
+  }
+
+  count(total, 0);
+  return result;
 };
-
-
