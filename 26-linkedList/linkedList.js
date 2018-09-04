@@ -17,31 +17,37 @@
 // list.tail.value;   //yields '5';
 
 
-var LinkedList = function(){
+var LinkedList = function () {
   this.head = null;
   this.tail = this.head;
 };
 
 //write methods here!
 
-LinkedList.prototype.addToTail = function(value){
-  var newNode = {value: value, next: null};
-  this.tail.next = newNode;
-  this.tail = newNode;
-};
-
-LinkedList.prototype.removeHead = function(){
-  this.head = this.head.next;
-};
-
-LinkedList.prototype.contains = function(value){
-  var lookup = function (node) {
-    if (!node.next) {return false;}
-    return node.value === value? true : lookup(node.next)
+LinkedList.prototype.addToTail = function (value) {
+  var newNode = this.makeNode(value);
+  if (this.head === null) {
+    this.head = newNode;
+    this.tail = this.head;
+  } else {
+    this.tail.next = newNode;
+    this.tail = newNode;
   }
-  lookup(this.head);
 };
 
-LinkedList.prototype.makeNode = function(value){
-  
+LinkedList.prototype.removeHead = function () {
+  this.head = this.head.next;
+  if (this.head === null) { this.tail = null; }
+};
+
+LinkedList.prototype.contains = function (value) {
+  var lookup = function (node) {
+    if (!node.next) { return false; }
+    return node.value === value ? true : lookup(node.next)
+  }
+  return lookup(this.head);
+};
+
+LinkedList.prototype.makeNode = function (value) {
+  return { value: value, next: null };
 };
