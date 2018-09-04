@@ -20,7 +20,15 @@
  * - It is not necessary to write a way to remove listeners.
  */
 
-var mixEvents = function(obj) {
-  // TODO: Your code here
+var mixEvents = function (obj) {
+  obj.storage = {};
+  obj.on = function (eventName, callback) {
+    if (obj.storage[eventName]) { obj.storage[eventName].push(callback); }
+    else { obj.storage[eventName] = [callback]; }
+  }
+  obj.trigger = function (eventName, ...args) {
+    if (!obj.storage[eventName]) { return null; }
+    obj.storage[eventName].forEach(callback => callback(...args));
+  }
   return obj;
 };
