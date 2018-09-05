@@ -37,24 +37,24 @@
 
 // This function is to help you test, and should not be incorporated in your solution.
 // It will transform an array of numbers into an array of valid objects.
-var testingTransform = function(array) {
+var testingTransform = function (array) {
   var transform = [];
-  
+
   for (var i = 0; i < array.length; i++)
-    transform.push({value: array[i], i: i});
+    transform.push({ value: array[i], i: i });
 
   return transform;
 };
 
-var insertionSort = function(array, comparator) {
+var insertionSort = function (array, comparator) {
   // Your code goes here. Feel free to add helper functions if needed.
   var comparator = comparator || function (a, b) { return a.value - b.value; }
   for (var i = 0; i < array.length; i++) {
     for (var j = 0; j < i; j++) {
       if (comparator(array[i], array[j]) < 0) {
         array.splice(j, 0, array[i]);
-        array.
-
+        array.splice(i + 1, 1);
+        continue;
       }
     }
   }
