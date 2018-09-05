@@ -7,27 +7,24 @@
  * Resize by half whenever utilization drops below 1/4.
  */
 
-var makeHashTable = function(){
+var makeHashTable = function () {
   var result = {};
   var storage = [];
   var storageLimit = 4;
   var size = 0;
-  result.insert = function(/*...*/ 
-){
-    // TODO: implement `insert`
+  result.insert = function (key, value) {
+    storage[getIndexBelowMaxForKey(key)] = value;
   };
 
-  result.retrieve = function(/*...*/ 
-){
-    // TODO: implement `retrieve`
+  result.retrieve = function (key) {
+    return storage[getIndexBelowMaxForKey(key)];
   };
 
-  result.remove = function(/*...*/ 
-){
-    // TODO: implement `remove`
+  result.remove = function (key) {
+    delete storage[getIndexBelowMaxForKey(key)];
   };
 
-  }
+
 
   return result;
 };
@@ -35,10 +32,10 @@ var makeHashTable = function(){
 // This is a "hashing function". You don't need to worry about it, just use it
 // to turn any string into an integer that is well-distributed between
 // 0 and max - 1
-var getIndexBelowMaxForKey = function(str, max){
+var getIndexBelowMaxForKey = function (str, max) {
   var hash = 0;
   for (var i = 0; i < str.length; i++) {
-    hash = (hash<<5) + hash + str.charCodeAt(i);
+    hash = (hash << 5) + hash + str.charCodeAt(i);
     hash = hash & hash; // Convert to 32bit integer
     hash = Math.abs(hash);
   }
