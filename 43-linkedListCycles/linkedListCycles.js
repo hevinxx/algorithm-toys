@@ -31,10 +31,15 @@
  * Constraint 3: Do not mutate the original nodes in any way
  */
 
-var Node = function(value){
+var Node = function (value) {
   return { value: value, next: null };
 }
 
-var hasCycle = function(linkedList){
-  // TODO: implement me!
+var hasCycle = function (linkedList) {
+  var cycle = function (node, value) {
+    return node.next === null
+      ? false : node.value === value
+        ? true : cycle(node.next, value)
+  }
+  return cycle(linkedList, linkedList.value);
 };
